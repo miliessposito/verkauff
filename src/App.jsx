@@ -200,7 +200,7 @@ const PUERTAS_TIPOS = {
     ],
     img: [
       "/puertaDeInterior1.jpeg",
-      "/puertaDelInterior2.jpeg"
+      "/puertaDeInterior2.jpeg"
     ],
   },
 };
