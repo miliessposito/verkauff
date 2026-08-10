@@ -790,7 +790,7 @@ export default function VerkauffLanding() {
             </div>
 
             <div className="h-96 rounded-3xl overflow-hidden shadow-2xl relative">
-              <img src="https://i.ibb.co/CKbVrcLs/Foto-de-la-fabrica-de-verkauff.png" alt="Nosotros" className="w-full h-full object-cover" />
+              <img src="Foto de la fabrica de verkauff.png" alt="Nosotros" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
