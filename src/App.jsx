@@ -199,7 +199,7 @@ const PUERTAS_TIPOS = {
       "Cero mantenimiento y alta durabilidad",
     ],
     img: [
-      "/puertaDelInterior1.jpeg",
+      "/puertaDeInterior1.jpeg",
       "/puertaDelInterior2.jpeg"
     ],
   },
