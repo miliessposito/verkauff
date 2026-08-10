@@ -132,7 +132,7 @@ const VENTANAS_TIPOS = [
     icon: MoveHorizontal,
     title: "Ventanas Corredizas",
     tag: "SC-200 / SC-400",
-    img: "https://i.ibb.co/8gdvZwGw/IMG-0589.jpg",
+    img: "/ventanasCorredizas.jpeg",
     desc: "Sistemas de 2 a 6 hojas con desplazamiento suave sobre rieles reforzados. Ideales para integrar ambientes con el exterior sin perder espacio.",
     uso: "Recomendadas para living-comedor, galerías y salidas a jardines o balcones.",
     features: [
@@ -147,7 +147,7 @@ const VENTANAS_TIPOS = [
     icon: DoorOpen,
     title: "Oscilobatientes y Practicables",
     tag: "OB-70 / PR-60",
-    img: "https://i.ibb.co/h1tbZX8R/IMG-0590.jpg",
+    img: "/ventanasOscilobatientes.jpeg",
     desc: "Apertura versátil: oscilante para ventilar sin abrir del todo, o batiente para una apertura completa y fácil limpieza.",
     uso: "Ideales para dormitorios, baños y ambientes con alta exigencia de aislación térmica y acústica.",
     features: [
@@ -162,7 +162,7 @@ const VENTANAS_TIPOS = [
     icon: Layers,
     title: "Paños Fijos de Gran Formato",
     tag: "FZ / CW",
-    img: "https://i.ibb.co/xtDYfBW9/IMG-0592.jpg",
+    img: "/pañosFijosDeGranTamaño.jpeg",
     desc: "Grandes vanos vidriados sin apertura que priorizan el ingreso de luz natural y vistas panorámicas ininterrumpidas.",
     uso: "Dobles alturas, hall de entrada, escaleras y vistas directas al paisaje.",
     features: [
@@ -185,8 +185,8 @@ const PUERTAS_TIPOS = {
       "Sistemas de sellado contra filtraciones",
     ],
     img: [
-      "https://i.ibb.co/ZZZWDpr/Puerta-negra-entrada.jpg",
-      "https://i.ibb.co/rKJ4q6d6/Puerta-negra-jardin.jpg"
+      "/puertasDeExterior1.jpeg",
+      "/puertasDeExterior2.jpeg"
     ],
   },
   interior: {
@@ -199,8 +199,8 @@ const PUERTAS_TIPOS = {
       "Cero mantenimiento y alta durabilidad",
     ],
     img: [
-      "https://i.ibb.co/Jjfz74Sy/IMG-0587.jpg",
-      "https://i.ibb.co/jvz44YDC/IMG-0588.jpg"
+      "/puertaDelInterior1.jpeg",
+      "/puertaDelInterior2.jpeg"
     ],
   },
 };
@@ -236,21 +236,21 @@ const PROYECTOS = [
   {
     name: "Residencia Nordelta",
     tipo: "Vivienda Unifamiliar",
-    img: "https://i.ibb.co/6R7LD975/1-C939-A42-6C7-43-FC-8-C8-B-DA9-A69-DBCD60.png",
+    img: "/residenciaNordelta.png",
     descripcion: "Grandes paños fijos que integran el estar con la laguna principal.",
     specs: ["Aluminio con RPT (Ruptura de Puente Térmico)", "Vidrio DVH de Control Solar", "Paños Fijos de Gran Formato y Esquineros"],
   },
   {
     name: "Fábrica Bella Vista",
     tipo: "Desarrollo Parque Industrial",
-    img: "https://i.ibb.co/DfZ6GTBC/0cedb7d3-c37d-4852-b1d6-953e1e618006.jpg",
+    img: "/fabricaBellaVista.jpeg",
     descripcion: "Fachada continua y carpinterías herméticas para máxima aislación sonora.",
     specs: ["Perfilería de Aluminio de Alto Rendimiento", "Alta Aislación Acústica e Ignífuga", "Vidrio Doble DVH para Eficiencia Térmica"],
   },
   {
     name: "Cerramiento Techo Pileta Nuñez",
     tipo: "Proyecto Institucional",
-    img: "https://i.ibb.co/gLqDYX0p/F4-F3-A145-AD12-4-EC4-853-C-40-FBBA2-A4-D5-E.png",
+    img: "/cerramientoTechoPileta.png",
     descripcion: "Diseño y montaje de cubierta vidriada de gran luz, optimizada para climatización y máxima iluminación natural.",
     specs: ["Perfilería estructural de alta resistencia", "Vidrio de Control Solar y UV", "Protección contra la humedad y condensación"],
   },
