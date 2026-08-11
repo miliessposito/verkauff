@@ -496,30 +496,40 @@ export default function VerkauffLanding() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSubmitting(true);
+    e.preventDefault();
+    setSubmitting(true);
 
-  try {
-    const response = await fetch("https://formspree.io/f/mdengdad", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(form) // O la variable donde guardes los datos del form (ej: form)
+    const formDataToSend = new FormData();
+    formDataToSend.append("access_key", "754fd0ae-d752-47bc-a19d-5a18c06f55b9");
+    
+    // Adjuntamos todos los campos del estado del formulario
+    Object.keys(form).forEach((key) => {
+      formDataToSend.append(key, form[key]);
     });
 
-    if (response.ok) {
-      setSubmitted(true);
-    } else {
-      alert("Hubo un error al enviar el formulario. Intentá nuevamente.");
+    // Capturamos el archivo subido si existe (plano o foto)
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput && fileInput.files[0]) {
+      formDataToSend.append("attachment", fileInput.files[0]);
     }
-  } catch (error) {
-    alert("Hubo un problema de conexión.");
-  } finally {
-    setSubmitting(false);
-  }
-};
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Hubo un error al enviar el formulario. Intentá nuevamente.");
+      }
+    } catch (error) {
+      alert("Hubo un problema de conexión.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const waMessage = encodeURIComponent(
     "Hola VERKAUFF, quisiera solicitar asesoramiento técnico y presupuestar carpinterías para mi obra."
