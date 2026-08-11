@@ -499,30 +499,34 @@ export default function VerkauffLanding() {
     e.preventDefault();
     setSubmitting(true);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("access_key", "754fd0ae-d752-47bc-a19d-5a18c06f55b9");
-    
-    // Adjuntamos todos los campos del estado del formulario
-    Object.keys(form).forEach((key) => {
-      formDataToSend.append(key, form[key]);
-    });
-
-    // Capturamos el archivo subido si existe (plano o foto)
-    const fileInput = document.querySelector('input[type="file"]');
-    if (fileInput && fileInput.files[0]) {
-      formDataToSend.append("attachment", fileInput.files[0]);
-    }
-
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("access_key", "754fd0ae-d752-47bc-a19d-5a18c06f55b9");
+
+      // Agregamos los campos de texto ignorando valores nulos o archivos del estado
+      Object.keys(form).forEach((key) => {
+        if (form[key] && typeof form[key] !== "object") {
+          formDataToSend.append(key, form[key]);
+        }
+      });
+
+      // Capturamos el archivo directamente del input de tipo file
+      const fileInput = document.querySelector('input[type="file"]');
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        formDataToSend.append("attachment", fileInput.files[0]);
+      }
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formDataToSend
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (data.success) {
         setSubmitted(true);
       } else {
-        alert("Hubo un error al enviar el formulario. Intentá nuevamente.");
+        alert(data.message || "Hubo un error al enviar el formulario.");
       }
     } catch (error) {
       alert("Hubo un problema de conexión.");
