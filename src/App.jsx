@@ -503,14 +503,15 @@ export default function VerkauffLanding() {
       const formDataToSend = new FormData();
       formDataToSend.append("access_key", "754fd0ae-d752-47bc-a19d-5a18c06f55b9");
 
-      // Agregamos los campos de texto ignorando valores nulos o archivos del estado
-      Object.keys(form).forEach((key) => {
-        if (form[key] && typeof form[key] !== "object") {
-          formDataToSend.append(key, form[key]);
-        }
-      });
+      // Cargar explícitamente los valores de texto del formulario
+      formDataToSend.append("Nombre", form.nombre || "");
+      formDataToSend.append("Email", form.email || "");
+      formDataToSend.append("Telefono", form.telefono || "");
+      formDataToSend.append("Tipo de Obra", form.tipo || "");
+      formDataToSend.append("Superficie (m2)", form.m2 || "");
+      formDataToSend.append("Mensaje", form.mensaje || "");
 
-      // Capturamos el archivo directamente del input de tipo file
+      // Captura limpia del archivo adjunto (PDF, PNG, etc.)
       const fileInput = document.querySelector('input[type="file"]');
       if (fileInput && fileInput.files && fileInput.files[0]) {
         formDataToSend.append("attachment", fileInput.files[0]);
@@ -523,13 +524,13 @@ export default function VerkauffLanding() {
 
       const data = await response.json();
 
-      if (data.success) {
+      if (response.ok && data.success) {
         setSubmitted(true);
       } else {
         alert(data.message || "Hubo un error al enviar el formulario.");
       }
     } catch (error) {
-      alert("Hubo un problema de conexión.");
+      alert("Hubo un problema de conexión al enviar el formulario.");
     } finally {
       setSubmitting(false);
     }
