@@ -517,27 +517,38 @@ export default function VerkauffLanding() {
         })
       });
 
-      // 2. Mensaje limpio con viñetas universales
+      // 2. Definición segura de Emojis mediante Unicode Hex
+      const iconUser = "\u{1F464}";  // 👤
+      const iconMail = "\u{2709}\u{FE0F}";  // ✉️
+      const iconPhone = "\u{1F422}"; // 📞
+      const iconBuild = "\u{1F3D7}\u{FE0F}"; // 🏗️
+      const iconChat = "\u{1F4AC}";  // 💬
+      const iconPin = "\u{1F4CC}";   // 📌
+
       const nombre = form.nombre || "No especificado";
       const email = form.email || "No especificado";
       const telefono = form.telefono || "No especificado";
       const tipo = form.tipo || "No especificado";
       const mensaje = form.mensaje || "Sin mensaje adicional";
 
-      const textoWA = 
-`*NUEVA CONSULTA DE COTIZACION - VERKAUFF*
+      // 3. Armado del texto con saltos de línea explícitos (\n)
+      const lineas = [
+        "*NUEVA CONSULTA DE COTIZACIÓN - VERKAUFF*",
+        "",
+        `${iconUser} *Nombre:* ${nombre}`,
+        `${iconMail} *Email:* ${email}`,
+        `${iconPhone} *Teléfono:* ${telefono}`,
+        `${iconBuild} *Tipo de Obra:* ${tipo}`,
+        `${iconChat} *Mensaje:* ${mensaje}`,
+        "",
+        `${iconPin} _Hola! Te adjunto la planilla/plano de mi obra por este chat para cotizar._`
+      ];
 
-► *Nombre:* ${nombre}
-► *Email:* ${email}
-► *Telefono:* ${telefono}
-► *Tipo de Obra:* ${tipo}
-► *Mensaje:* ${mensaje}
+      const textoFinal = lineas.join("\n");
 
-✔ _Hola! Te adjunto la planilla por este chat para cotizar._`;
-
-      // 3. Redirección limpia a WhatsApp
+      // 4. Redirección limpia a WhatsApp
       const numeroTelefono = "5491124721912";
-      const urlWA = `https://api.whatsapp.com/send?phone=${numeroTelefono}&text=${encodeURIComponent(textoWA)}`;
+      const urlWA = `https://api.whatsapp.com/send?phone=${numeroTelefono}&text=${encodeURIComponent(textoFinal)}`;
 
       setSubmitted(true);
       window.open(urlWA, "_blank");
