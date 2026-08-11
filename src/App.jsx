@@ -495,14 +495,31 @@ export default function VerkauffLanding() {
     setPlanoFileName(file ? file.name : "");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitting(true);
+
+  try {
+    const response = await fetch("https://formspree.io/f/mdengdad", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(form) // O la variable donde guardes los datos del form (ej: form)
+    });
+
+    if (response.ok) {
       setSubmitted(true);
-    }, 800);
-  };
+    } else {
+      alert("Hubo un error al enviar el formulario. Intentá nuevamente.");
+    }
+  } catch (error) {
+    alert("Hubo un problema de conexión.");
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   const waMessage = encodeURIComponent(
     "Hola VERKAUFF, quisiera solicitar asesoramiento técnico y presupuestar carpinterías para mi obra."
