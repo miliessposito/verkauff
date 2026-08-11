@@ -500,45 +500,42 @@ export default function VerkauffLanding() {
     setSubmitting(true);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("access_key", "754fd0ae-d752-47bc-a19d-5a18c06f55b9");
-
-      // Cargar los campos para la copia por mail
-      formDataToSend.append("Nombre", form.nombre || "");
-      formDataToSend.append("Email", form.email || "");
-      formDataToSend.append("Telefono", form.telefono || "");
-      formDataToSend.append("Tipo de Obra", form.tipo || "");
-      formDataToSend.append("Superficie (m2)", form.m2 || "");
-      formDataToSend.append("Mensaje", form.mensaje || "");
-
-      // Envío de respaldo por correo
+      // 1. Envío seguro a Web3Forms en formato JSON
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formDataToSend
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "754fd0ae-d752-47bc-a19d-5a18c06f55b9",
+          Nombre: form.nombre || "No especificado",
+          Email: form.email || "No especificado",
+          Telefono: form.telefono || "No especificado",
+          "Tipo de Obra": form.tipo || "No especificado",
+          Mensaje: form.mensaje || "Sin mensaje adicional"
+        })
       });
 
-      // Construcción del mensaje formateado para WhatsApp
+      // 2. Mensaje para WhatsApp sin m2 y con emojis compatibles
+      const numeroTelefono = "5491124721912";
       const mensajeWA = `*NUEVA CONSULTA DE COTIZACIÓN - VERKAUFF*
 
 👤 *Nombre:* ${form.nombre || "No especificado"}
 ✉️ *Email:* ${form.email || "No especificado"}
 📞 *Teléfono:* ${form.telefono || "No especificado"}
 🏗️ *Tipo de Obra:* ${form.tipo || "No especificado"}
-📐 *Superficie aproximada:* ${form.m2 ? form.m2 + " m²" : "No especificado"}
 💬 *Mensaje:* ${form.mensaje || "Sin mensaje adicional"}
 
 📌 _Hola! Te adjunto la planilla por este chat para cotizar._`;
 
-      // Codificación de URL para WhatsApp
+      // 3. Redirección a WhatsApp
       const urlWA = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensajeWA)}`;
-
       setSubmitted(true);
-      
-      // Abre WhatsApp en una pestaña nueva
       window.open(urlWA, "_blank");
 
     } catch (error) {
-      alert("Hubo un problema de conexión. Inténtalo nuevamente.");
+      alert("Hubo un problema al procesar la solicitud.");
     } finally {
       setSubmitting(false);
     }
@@ -948,38 +945,25 @@ export default function VerkauffLanding() {
                     </div>
                   </div>
 
-                  {/* NUEVO CAMPO: Cargar Planilla / Archivos */}
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                      Adjuntar Planilla de Carpinterías / Plano (PDF, DWG, Excel, PNG)
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="file"
-                        id="file-upload"
-                        accept=".pdf,.dwg,.dxf,.xlsx,.xls,.png,.jpg,.jpeg"
-                        onChange={handleFileChange}
-                        className="hidden"
-                      />
-                      <label
-                        htmlFor="file-upload"
-                        className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-white border border-dashed border-slate-300 text-sm cursor-pointer hover:border-sky-600 transition-colors"
-                      >
-                        <span className={planoFileName ? "text-slate-800 font-medium truncate" : "text-slate-400"}>
-                          {planoFileName || "Seleccionar archivo desde tu equipo..."}
-                        </span>
-                        <span className="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg shrink-0 ml-2">
-                          Buscar
-                        </span>
-                      </label>
-                    </div>
-                  </div>
+           {/* AVISO REDIRECCIÓN WHATSAPP */}
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Mensaje o detalles</label>
+            <textarea name="mensaje" value={form.mensaje} onChange={handleChange} rows={3} placeholder="Detalles adicionales sobre las aberturas..." className="w-full ..."></textarea>
+          </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Mensaje o detalles</label>
-                    <textarea name="mensaje" value={form.mensaje} onChange={handleChange} rows={3} placeholder="Detalles adicionales sobre las aberturas..." className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-600 resize-none" />
-                  </div>
+          <div className="mb-4 p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-start gap-3 text-sky-900 text-sm">
+            <span className="text-xl">📲</span>
+            <div>
+              <p className="font-semibold mb-0.5">¿Tenés planos o planillas de carpintería?</p>
+              <p className="text-xs text-sky-700 m-0">
+                Al hacer clic en <strong>Enviar Consulta y Archivos</strong>, serás redirigido automáticamente a WhatsApp con tus datos cargados para que puedas adjuntar tu archivo directamente en el chat.
+              </p>
+            </div>
 
+          <button
+            type="submit"
+            disabled={submitting}
+            
                   <button
                     type="submit"
                     disabled={submitting}
