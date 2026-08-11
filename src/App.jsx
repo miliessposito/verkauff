@@ -503,7 +503,7 @@ export default function VerkauffLanding() {
       const formDataToSend = new FormData();
       formDataToSend.append("access_key", "754fd0ae-d752-47bc-a19d-5a18c06f55b9");
 
-      // Cargar explícitamente los valores de texto del formulario
+      // Cargar los campos para la copia por mail
       formDataToSend.append("Nombre", form.nombre || "");
       formDataToSend.append("Email", form.email || "");
       formDataToSend.append("Telefono", form.telefono || "");
@@ -511,26 +511,33 @@ export default function VerkauffLanding() {
       formDataToSend.append("Superficie (m2)", form.m2 || "");
       formDataToSend.append("Mensaje", form.mensaje || "");
 
-      // Captura limpia del archivo adjunto (PDF, PNG, etc.)
-      const fileInput = document.querySelector('input[type="file"]');
-      if (fileInput && fileInput.files && fileInput.files[0]) {
-        formDataToSend.append("attachment", fileInput.files[0]);
-      }
-
-      const response = await fetch("https://api.web3forms.com/submit", {
+      // Envío de respaldo por correo
+      await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formDataToSend
       });
 
-      const data = await response.json();
+      // Construcción del mensaje formateado para WhatsApp
+      const numeroTelefono = "5491124721912";
+      const mensajeWA = `*NUEVA CONSULTA DE COTIZACIÓN - VERKAUFF*\n\n` +
+        `👤 *Nombre:* ${form.nombre || "No especificado"}\n` +
+        `✉️ *Email:* ${form.email || "No especificado"}\n` +
+        `📞 *Teléfono:* ${form.telefono || "No especificado"}\n` +
+        `🏗️ *Tipo de Obra:* ${form.tipo || "No especificado"}\n` +
+        `📐 *Superficie aproximada:* ${form.m2 ? form.m2 + " m²" : "No especificado"}\n` +
+        `💬 *Mensaje:* ${form.mensaje || "Sin mensaje adicional"}\n\n` +
+        `📌 _Hola! Te adjunto el plano/planilla de mi obra por este chat para cotizar._`;
 
-      if (response.ok && data.success) {
-        setSubmitted(true);
-      } else {
-        alert(data.message || "Hubo un error al enviar el formulario.");
-      }
+      // Codificación de URL para WhatsApp
+      const urlWA = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensajeWA)}`;
+
+      setSubmitted(true);
+      
+      // Abre WhatsApp en una pestaña nueva
+      window.open(urlWA, "_blank");
+
     } catch (error) {
-      alert("Hubo un problema de conexión al enviar el formulario.");
+      alert("Hubo un problema de conexión. Inténtalo nuevamente.");
     } finally {
       setSubmitting(false);
     }
