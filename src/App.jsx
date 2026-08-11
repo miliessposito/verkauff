@@ -917,38 +917,37 @@ export default function VerkauffLanding() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nombre</label>
-                      <input required name="nombre" value={form.nombre} onChange={handleChange} placeholder="Tu nombre" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-600" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email</label>
-                      <input required type="email" name="email" value={form.email} onChange={handleChange} placeholder="email@ejemplo.com" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-600" />
-                    </div>
-                  </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nombre</label>
+              <input required name="nombre" value={form.nombre} onChange={handleChange} placeholder="Tu nombre" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-500" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email</label>
+              <input required type="email" name="email" value={form.email} onChange={handleChange} placeholder="email@ejemplo.com" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-500" />
+            </div>
+          </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Teléfono</label>
-                      <input required name="telefono" value={form.telefono} onChange={handleChange} placeholder="Teléfono de contacto" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-600" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Tipo de obra</label>
-                      <select name="tipo" value={form.tipo} onChange={handleChange} className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-600">
-                        <option>Vivienda (Obra nueva)</option>
-                        <option>Remodelación / Cambio de aberturas</option>
-                        <option>Edificio / Complejo residencial</option>
-                        <option>Comercial / Corporativo</option>
-                        <option>Otro tipo de proyecto</option>
-                      </select>
-                    </div>
-                  </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Teléfono</label>
+              <input required name="telefono" value={form.telefono} onChange={handleChange} placeholder="Teléfono de contacto" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-500" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Tipo de obra</label>
+              <select name="tipo" value={form.tipo} onChange={handleChange} className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-500">
+                <option>Vivienda (Obra nueva)</option>
+                <option>Remodelación / Cambio de aberturas</option>
+                <option>Edificio / Complejo residencial</option>
+                <option>Comercial / Corporativo</option>
+                <option>Otro tipo de proyecto</option>
+              </select>
+            </div>
+          </div>
 
-           {/* AVISO REDIRECCIÓN WHATSAPP */}
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Mensaje o detalles</label>
-            <textarea name="mensaje" value={form.mensaje} onChange={handleChange} rows={3} placeholder="Detalles adicionales sobre las aberturas..." className="w-full ..."></textarea>
+            <textarea name="mensaje" value={form.mensaje} onChange={handleChange} rows={3} placeholder="Detalles adicionales sobre las aberturas..." className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-sky-500" />
           </div>
 
           <div className="mb-4 p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-start gap-3 text-sky-900 text-sm">
@@ -959,21 +958,18 @@ export default function VerkauffLanding() {
                 Al hacer clic en <strong>Enviar Consulta y Archivos</strong>, serás redirigido automáticamente a WhatsApp con tus datos cargados para que puedas adjuntar tu archivo directamente en el chat.
               </p>
             </div>
+          </div>
 
           <button
             type="submit"
             disabled={submitting}
-            
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full py-4 rounded-xl text-sm font-bold text-white transition-all shadow-md active:scale-95 flex items-center justify-center gap-2"
-                    style={{ backgroundColor: C.accent }}
-                  >
-                    {submitting ? "Enviando..." : "Enviar Consulta y Archivos"}
-                    {!submitting && <Send className="w-4 h-4" />}
-                  </button>
-                </form>
+            className="w-full py-4 rounded-xl text-sm font-bold text-white transition-all shadow-md active:scale-95 flex items-center justify-center gap-2"
+            style={{ backgroundColor: C.accent }}
+          >
+            {submitting ? "Enviando..." : "Enviar Consulta y Archivos"}
+            {!submitting && <Send className="w-4 h-4" />}
+          </button>
+        </form>
               )}
             </div>
           </div>
