@@ -500,7 +500,7 @@ export default function VerkauffLanding() {
     setSubmitting(true);
 
     try {
-      // 1. Envío seguro a Web3Forms en formato JSON
+      // 1. Envío de datos a Web3Forms
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -517,20 +517,28 @@ export default function VerkauffLanding() {
         })
       });
 
-      // 2. Mensaje para WhatsApp sin m2 y con emojis compatibles
+      // 2. Mensaje limpio con viñetas universales
+      const nombre = form.nombre || "No especificado";
+      const email = form.email || "No especificado";
+      const telefono = form.telefono || "No especificado";
+      const tipo = form.tipo || "No especificado";
+      const mensaje = form.mensaje || "Sin mensaje adicional";
+
+      const textoWA = 
+`*NUEVA CONSULTA DE COTIZACION - VERKAUFF*
+
+► *Nombre:* ${nombre}
+► *Email:* ${email}
+► *Telefono:* ${telefono}
+► *Tipo de Obra:* ${tipo}
+► *Mensaje:* ${mensaje}
+
+✔ _Hola! Te adjunto la planilla por este chat para cotizar._`;
+
+      // 3. Redirección limpia a WhatsApp
       const numeroTelefono = "5491124721912";
-      const mensajeWA = `*NUEVA CONSULTA DE COTIZACIÓN - VERKAUFF*
+      const urlWA = `https://api.whatsapp.com/send?phone=${numeroTelefono}&text=${encodeURIComponent(textoWA)}`;
 
-👤 *Nombre:* ${form.nombre || "No especificado"}
-✉️ *Email:* ${form.email || "No especificado"}
-📞 *Teléfono:* ${form.telefono || "No especificado"}
-🏗️ *Tipo de Obra:* ${form.tipo || "No especificado"}
-💬 *Mensaje:* ${form.mensaje || "Sin mensaje adicional"}
-
-📌 _Hola! Te adjunto la planilla por este chat para cotizar._`;
-
-      // 3. Redirección a WhatsApp
-      const urlWA = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensajeWA)}`;
       setSubmitted(true);
       window.open(urlWA, "_blank");
 
