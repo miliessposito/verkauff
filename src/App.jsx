@@ -518,15 +518,16 @@ export default function VerkauffLanding() {
       });
 
       // Construcción del mensaje formateado para WhatsApp
-      const numeroTelefono = "5491124721912";
-      const mensajeWA = `*NUEVA CONSULTA DE COTIZACIÓN - VERKAUFF*\n\n` +
-        `👤 *Nombre:* ${form.nombre || "No especificado"}\n` +
-        `✉️ *Email:* ${form.email || "No especificado"}\n` +
-        `📞 *Teléfono:* ${form.telefono || "No especificado"}\n` +
-        `🏗️ *Tipo de Obra:* ${form.tipo || "No especificado"}\n` +
-        `📐 *Superficie aproximada:* ${form.m2 ? form.m2 + " m²" : "No especificado"}\n` +
-        `💬 *Mensaje:* ${form.mensaje || "Sin mensaje adicional"}\n\n` +
-        `📌 _Hola! Te adjunto el plano/planilla de mi obra por este chat para cotizar._`;
+      const mensajeWA = `*NUEVA CONSULTA DE COTIZACIÓN - VERKAUFF*
+
+👤 *Nombre:* ${form.nombre || "No especificado"}
+✉️ *Email:* ${form.email || "No especificado"}
+📞 *Teléfono:* ${form.telefono || "No especificado"}
+🏗️ *Tipo de Obra:* ${form.tipo || "No especificado"}
+📐 *Superficie aproximada:* ${form.m2 ? form.m2 + " m²" : "No especificado"}
+💬 *Mensaje:* ${form.mensaje || "Sin mensaje adicional"}
+
+📌 _Hola! Te adjunto la planilla por este chat para cotizar._`;
 
       // Codificación de URL para WhatsApp
       const urlWA = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensajeWA)}`;
