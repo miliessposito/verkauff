@@ -520,7 +520,7 @@ export default function VerkauffLanding() {
       // 2. Definición segura de Emojis mediante Unicode Hex
       const iconUser = "\u{1F464}";  // 👤
       const iconMail = "\u{2709}\u{FE0F}";  // ✉️
-      const iconPhone = "\u{1F422}"; // 📞
+      const iconPhone = "\u{1F4F1}"; // 📱
       const iconBuild = "\u{1F3D7}\u{FE0F}"; // 🏗️
       const iconChat = "\u{1F4AC}";  // 💬
       const iconPin = "\u{1F4CC}";   // 📌
